@@ -1,0 +1,16 @@
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: azure;
+}
+
+#main {
+    background-color: beige;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px 5px lightgrey;
+    gap: 10px;
+    padding: 20px;
+}
