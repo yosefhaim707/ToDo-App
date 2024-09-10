@@ -4,6 +4,7 @@ const addButton = document.getElementById('add_button');
 addButton.addEventListener('click', function(event) {
     let taskObject = createTask(input);
     addToStorage(taskObject);
+    let newRow = newRowGenerator(taskObject);
 });
 
 function createTask(input){
@@ -38,4 +39,9 @@ function getTasks(){
         tasks = [];
     }
     return tasks;
+}
+
+function newRowGenerator(task){
+    let row = document.createElement('tr');
+    
 }
