@@ -1,10 +1,10 @@
 // Add task button
 let input = document.getElementById('task_input');
-console.log(input);
+//console.log(input);
 const addButton = document.getElementById('add_button');
 addButton.addEventListener('click', function(event) {
     let taskObject = createTask(input);
-    console.log(taskObject);
+    //console.log(taskObject);
     addToStorage(taskObject);
     let tasks = getTasks();
     displayTasks(tasks);
@@ -75,7 +75,6 @@ function createActions(){
 }
 
 function displayTasks(tasks){
-    let table = document.getElementById('task_table');
     let tbody = document.getElementsByTagName('tbody')[0];
     tbody.innerHTML = '';
     for(let i = 0; i < tasks.length; i++){
@@ -88,3 +87,16 @@ function deleteLocalStorage(){
     localStorage.clear();
 }
 deleteLocalStorage();
+
+
+// Filter completed tasks
+const filterButton = document.getElementById('filter');
+filterButton.addEventListener('click', filterTasks);
+function filterTasks(){
+    let tasks = getTasks();
+    console.log(tasks);
+    let completedTasks = tasks.filter(task => task.completed === true);
+    console.log(completedTasks);
+    displayTasks(completedTasks);
+}
+
