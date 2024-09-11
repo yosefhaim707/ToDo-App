@@ -24,7 +24,7 @@ function createTask(input) {
     // Set the task as not completed
     taskObject.completed = false;
     return taskObject;
-};
+}
 
 // Generate a unique id for the task
 function idGenerator() {
@@ -37,14 +37,14 @@ function idGenerator() {
       counter += 1;
     }
     return result;
-};
+}
 
 // Add the task object to the tasks array in local storage
 function addToStorage(taskObject) {
     const tasks = getTasks();
     tasks.push(taskObject);
     localStorage.setItem('tasks', JSON.stringify(tasks));
-};
+}
 
 // Get the tasks array from local storage
 function getTasks() {
@@ -53,7 +53,7 @@ function getTasks() {
         tasks = [];
     }
     return tasks;
-};
+}
 
 // Create a new row in the table for the task
 function newRowGenerator(task) {
@@ -70,7 +70,7 @@ function newRowGenerator(task) {
     row.appendChild(completed);
     row.appendChild(actions);
     return row;
-};
+}
 
 // Create the actions for the task
 function createActions(taskId) {
@@ -88,7 +88,7 @@ function createActions(taskId) {
     actions.appendChild(completeButton);
     actions.appendChild(deleteButton);
     return actions;
-};
+}
 
 // Complete the task
 function completeFunc(taskId) {
@@ -97,7 +97,7 @@ function completeFunc(taskId) {
     task.completed = !task.completed;
     localStorage.setItem('tasks', JSON.stringify(tasks));
     displayTasks(tasks);
-};
+}
 
 // Delete the task
 function deleteTask(taskId) {
@@ -105,7 +105,7 @@ function deleteTask(taskId) {
     tasks = tasks.filter(task => task.id !== taskId);
     localStorage.setItem('tasks', JSON.stringify(tasks));
     displayTasks(tasks);
-};
+}
 
 // Edit the task
 function editTask(taskId) {
@@ -125,7 +125,7 @@ function editTask(taskId) {
     cancelButton.addEventListener('click', () => {
         document.getElementById('edit_container').style.display = 'none';
     })
-};
+}
 
 // Display the tasks in the table
 function displayTasks(tasks) {
@@ -135,12 +135,12 @@ function displayTasks(tasks) {
         const row = newRowGenerator(tasks[i]);
         tbody.appendChild(row);
     }
-};
+}
 
 // Delete all tasks from local storage
 function deleteLocalStorage() {
     localStorage.clear();
-};
+}
 deleteLocalStorage();
 
 // Add event listener to the filter button
@@ -154,5 +154,5 @@ function filterTasks() {
     const completedTasks = tasks.filter(task => task.completed === true);
     console.log(completedTasks);
     displayTasks(completedTasks);
-};
+}
 
