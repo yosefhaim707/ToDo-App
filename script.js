@@ -1,33 +1,23 @@
-// Get the input element to add a new task
-const input = document.getElementById('task_input');
+// Add task button
+let input = document.getElementById('task_input');
 
-// Add event listener to the add button
 const addButton = document.getElementById('add_button');
 addButton.addEventListener('click', function(event) {
-    // Create a new task object
-    const taskObject = createTask(input);
-    // Add the task object to the tasks array in local storage
+    let taskObject = createTask(input);
     addToStorage(taskObject);
-    // Get the tasks array from local storage
-    const tasks = getTasks();
-    // Display the tasks in the table
+    let tasks = getTasks();
     displayTasks(tasks);
 });
 
-// Create a new task object
-function createTask(input) {
-    const taskObject = {};
-    // Generate a unique id for the task
+function createTask(input){
+    let taskObject = {}
     taskObject.id = idGenerator();
-    // Get the task name from the input element
     taskObject.task = input.value;
-    // Set the task as not completed
     taskObject.completed = false;
     return taskObject;
 }
 
-// Generate a unique id for the task
-function idGenerator() {
+function idGenerator(){
     let result = '';
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const charactersLength = characters.length;
@@ -39,29 +29,26 @@ function idGenerator() {
     return result;
 }
 
-// Add the task object to the tasks array in local storage
-function addToStorage(taskObject) {
-    const tasks = getTasks();
+function addToStorage(taskObject){
+    let tasks = getTasks();
     tasks.push(taskObject);
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
-// Get the tasks array from local storage
-function getTasks() {
-    const tasks = JSON.parse(localStorage.getItem('tasks'));
-    if (!tasks) {
+function getTasks(){
+    let tasks = JSON.parse(localStorage.getItem('tasks'));
+    if(!tasks){
         tasks = [];
     }
     return tasks;
 }
 
-// Create a new row in the table for the task
-function newRowGenerator(task) {
-    const row = document.createElement('tr');
-    const id = document.createElement('td');
-    const taskName = document.createElement('td');
-    const completed = document.createElement('td');
-    const actions = createActions(task.id);
+function newRowGenerator(task){
+    let row = document.createElement('tr');
+    let id = document.createElement('td');
+    let taskName = document.createElement('td');
+    let completed = document.createElement('td');
+    let actions = createActions(task.id);
     id.textContent = task.id;
     taskName.textContent = task.task;
     completed.textContent = task.completed;
@@ -72,12 +59,11 @@ function newRowGenerator(task) {
     return row;
 }
 
-// Create the actions for the task
-function createActions(taskId) {
-    const actions = document.createElement('td');
-    const editButton = document.createElement('button');
-    const completeButton = document.createElement('button');
-    const deleteButton = document.createElement('button');
+function createActions(taskId){
+    let actions = document.createElement('td');
+    let editButton = document.createElement('button');
+    let completeButton = document.createElement('button');
+    let deleteButton = document.createElement('button');
     editButton.textContent = 'Edit';
     completeButton.textContent = 'Complete';
     deleteButton.textContent = 'Delete';
@@ -90,30 +76,27 @@ function createActions(taskId) {
     return actions;
 }
 
-// Complete the task
-function completeFunc(taskId) {
-    const tasks = getTasks();
-    const task = tasks.find(task => task.id === taskId);
+function completeFunc(taskId){
+    let tasks = getTasks();
+    let task = tasks.find(task => task.id === taskId);
     task.completed = !task.completed;
     localStorage.setItem('tasks', JSON.stringify(tasks));
     displayTasks(tasks);
 }
 
-// Delete the task
-function deleteTask(taskId) {
-    const tasks = getTasks();
+function deleteTask(taskId){
+    let tasks = getTasks();
     tasks = tasks.filter(task => task.id !== taskId);
     localStorage.setItem('tasks', JSON.stringify(tasks));
     displayTasks(tasks);
 }
 
-// Edit the task
-function editTask(taskId) {
-    const tasks = getTasks();
-    const task = tasks.find(task => task.id === taskId);
+function editTask(taskId){
+    let tasks = getTasks();
+    let task = tasks.find(task => task.id === taskId);
     document.getElementById('edit_input').value = task.task;
     document.getElementById('edit_container').style.display = 'block';
-    const editButton = document.getElementById('edit_button');
+    let editButton = document.getElementById('edit_button');
     editButton.addEventListener('click', () => {
         task.task = document.getElementById('edit_input').value;
         localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -121,38 +104,37 @@ function editTask(taskId) {
         document.getElementById('edit_container').style.display = 'none';
     })
 
-    const cancelButton = document.getElementById('cancel_button');
+    let cancelButton = document.getElementById('cancel_button');
     cancelButton.addEventListener('click', () => {
         document.getElementById('edit_container').style.display = 'none';
     })
 }
 
-// Display the tasks in the table
-function displayTasks(tasks) {
-    const tbody = document.getElementsByTagName('tbody')[0];
+
+function displayTasks(tasks){
+    let tbody = document.getElementsByTagName('tbody')[0];
     tbody.innerHTML = '';
-    for (let i = 0; i < tasks.length; i++) {
-        const row = newRowGenerator(tasks[i]);
+    for(let i = 0; i < tasks.length; i++){
+        let row = newRowGenerator(tasks[i]);
         tbody.appendChild(row);
     }
 }
 
-// Delete all tasks from local storage
-function deleteLocalStorage() {
+function deleteLocalStorage(){
     localStorage.clear();
 }
 deleteLocalStorage();
 
-// Add event listener to the filter button
+
+
 const filterButton = document.getElementById('filter');
 filterButton.addEventListener('click', filterTasks);
-
-// Filter the tasks by completed
-function filterTasks() {
-    const tasks = getTasks();
+function filterTasks(){
+    let tasks = getTasks();
     console.log(tasks);
-    const completedTasks = tasks.filter(task => task.completed === true);
+    let completedTasks = tasks.filter(task => task.completed === true);
     console.log(completedTasks);
     displayTasks(completedTasks);
 }
+
 
